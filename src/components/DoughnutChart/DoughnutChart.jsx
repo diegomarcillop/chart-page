@@ -8,14 +8,7 @@ export default function DoughnutChart({ country }) {
 
   useEffect(() => {
     if (country !== null) {
-      let recovered = 0,
-        deaths = 0;
-      // eslint-disable-next-line
-      country.map((contry, index) => {
-        recovered = recovered + country[index].Recovered;
-        deaths = deaths + country[index].Deaths;
-      });
-      setStatus({ deaths: deaths, recovered: recovered });
+      setStatus({ deaths: country[country.length - 1].Deaths, recovered: country[country.length - 1].Recovered  });
     }
   }, [country]);
 
