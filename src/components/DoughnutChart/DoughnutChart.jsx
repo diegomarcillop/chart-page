@@ -7,7 +7,8 @@ export default function DoughnutChart({ country }) {
   const [status, setStatus] = useState([{ deaths: 0, recovered: 0 }]);
 
   useEffect(() => {
-    if (country !== null) {
+    console.log(country);
+    if (country !== null && country.length!==0) {
       setStatus({ deaths: country[country.length - 1].Deaths, recovered: country[country.length - 1].Recovered  });
     }
   }, [country]);
