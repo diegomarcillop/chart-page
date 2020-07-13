@@ -1,22 +1,20 @@
 import React, { createRef, useEffect } from "react";
 import Chart from "chart.js";
-import { useState } from "react";
 
-export default function LineChart({country}){
+export default function LineChart({ country }) {
   const chartRef = createRef();
-  const [data, setData] = useState([]);
-  const [labels, setLabels] = useState([]);
+  const data = [];
+  const labels = [];
 
   useEffect(() => {
-   if(country!==null){
-    country.map((contry, index) => {
-      data[index] = country[index].Deaths;
-      labels[index] =  index;
-    })
-   }
-    
+    if (country !== null) {
+      // eslint-disable-next-line
+      country.map((contry, index) => {
+        data[index] = country[index].Deaths;
+        labels[index] = index;
+      });
+    }
   });
-
 
   useEffect(() => {
     const myChartRef = chartRef.current.getContext("2d");
@@ -27,25 +25,24 @@ export default function LineChart({country}){
         datasets: [
           {
             label: "Deaths",
-            backgroundColor: 'rgba(255,99,132,1)',
-            borderColor: '#FFFAF9',
+            backgroundColor: "rgba(255,99,132,1)",
+            borderColor: "#FFFAF9",
             data: data,
           },
         ],
       },
       options: {
         scales: {
-          yAxes: [{
-              stacked: true
-          }]
+          yAxes: [
+            {
+              stacked: true,
+            },
+          ],
+        },
+        responsive: true,
       },
-      responsive: true
-      },
-      
     });
   });
 
-  return (
-       <canvas id="myChart" ref={chartRef} />
-   );
+  return <canvas id="myChart" ref={chartRef} />;
 }
